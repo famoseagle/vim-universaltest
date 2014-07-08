@@ -48,7 +48,7 @@ if !exists('universaltest_split_command')
     let universaltest_split_command='split'
 endif
 
-nmap <silent> <leader>uu :call <SID>TestSuiteRun(['unit', 'functional'], 1)<CR><CR>
+nmap <silent> <leader>uu :call <SID>TestSuiteRun(['unit', 'functional', 'spec'], 1)<CR><CR>
 nmap <silent> <leader>ut :call <SID>TestSuiteRun(['unit', 'functional'], 0)<CR><CR>
 nmap <silent> <leader>uf :call <SID>TestSuiteRun(['functional', 'unit'], 0)<CR><CR>
 nmap <silent> <leader>um :call <SID>TestCurrentMethod()<CR><CR>
@@ -95,6 +95,10 @@ endfu
 
 fu! s:is_slow(file)
     return match(a:file, '/slowtests/.\+_test\.[^/]\+$') > 0
+endfu
+
+fu! s:is_spec(file)
+  return match(a:file, '/\(models\|services\)/.\+_spec\.[^/]\+$') > 0
 endfu
 
 fu! s:test_dir(file, type)
